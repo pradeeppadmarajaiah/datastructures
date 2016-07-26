@@ -92,6 +92,7 @@ public class StackImplementationUsingLinkedList<Item> {
 		System.out.println("Initial size is : " + stack.size);
 		System.out.println("check is empty: " + stack.isEmpty());
 		stack.push(100);
+		stack.push(200);
 		System.out.println("Afer adding : " + stack.size);
 		System.out.println("check is empty: " + stack.isEmpty());
 		int popped = stack.pop();
