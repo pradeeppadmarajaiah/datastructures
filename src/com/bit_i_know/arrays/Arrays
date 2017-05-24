@@ -1,0 +1,27 @@
+https://en.wikipedia.org/wiki/Array_data_structure
+Arrays
+	Type  
+		Linear Data Structure
+	Designed  
+		Store a group of objects of the same or different types
+	Stores 
+		 Primitives & References
+	Purpose 
+		 Most efficient data structure for storing and accessing a sequence of objects.
+		 Best used when you know how many elements you need to store before the program executes
+		 Code Optimization: It makes the code optimized, we can retrieve or sort the data easily.
+         Random access: We can get any data located at any index position.
+	How internally works:
+		Each item in an array is called an element.
+		Each element is accessed by numerical index.
+	Types : 
+		Single Dimensional
+		Multi Dimensional
+	Draw Back: 
+		Arrays are not dynamic data structures: They have a finite, fixed number of elements.
+		Memory must be allocated for every element in an array, even if only part of the array is used.
+		Each access to an array index is checked against the current size of the array and an exception is thrown if the index is out of bounds. 
+		This makes array access a relatively expensive operation when compared to C/C++ arrays.
+	Big O Analysis: 
+		Array lookup is O(1) as long as you know the index of the element you want,
+		Array lookup is O(n) in the worst case, if only value is known.
