@@ -1,0 +1,102 @@
+Constructs an empty list with an initial capacity of ten.
+
+Resizable-array implementation of the List interface.
+Is not Synchronized. Use the Collections.synchronizedList method.
+
+An application can increase the capacity of an ArrayList instance before adding a large number of elements using the ensureCapacity operation. 
+This may reduce the amount of incremental reallocation.
+
+How it works
+Insertion
+	Appends the specified element to the end of this list. 
+	Inserts the specified element at the specified position in this list. 
+		Shifts the element currently at that position (if any) and any subsequent elements to the right 
+		(adds one to their indices).
+		ArrayList make a contiguous memory allocation which means that always first create a space and then insert a value in it.
+		So it require two step for insertion and insertion of any value in ArrayList take more time. 
+		So for fast insertion and deletion we never prefer ArrayList.
+Java : As you add items to an ArrayList, the list checks to see if the backing array has room left. 
+	   If there is room, the new item is just added at the next empty space. 
+	   If there is not room, a new, larger, array is created, and the old array is copied into the new one
+Removal
+	remove : Removes the element at the specified position in this list. 
+	Shifts any subsequent elements to the left
+	Clear : Removes all of the elements from this list. The list will be empty after this call returns.
+
+Retrieving
+	Since Array is an index based data-structure searching or getting element from Array with index is pretty fast.
+	Array provides O(1) performance for get(index)
+
+
+Big O
+The add operation runs in amortized constant time, that is, adding n elements requires O(n) time.
+The size, isEmpty, get, set, iterator, and listIterator operations run in constant time.
+
+Internally working
+
+When we actually create an arrayList following piece of code is executed -
+this.elementData = new Object[initialCapacity];
+
+	 create an ArrayList as follows 
+
+List<String> myList = new ArrayList<String>();   
+List<String> myList = new ArrayList<String>(6); 
+
+ 1st one invokes a default constructor while the second will invoke a constructor with an integer argument. 
+ When we create an ArrayList in the 2nd way it will internally create an array of Object with size specified 
+ in the constructor argument(6 in our case). 
+ Default value is 10 i.e if no size is supplied array with size 10 is created. 
+ 
+  public ArrayList(int initialCapacity) {
+    super();
+        if (initialCapacity < 0)
+            throw new IllegalArgumentException("Illegal Capacity: "+
+                                               initialCapacity);
+    this.elementData = new Object[initialCapacity];
+    }
+ 
+    public ArrayList() {
+    this(10);
+    } 
+
+
+Inside .add() method there is this check.
+	 Before adding element into the array 
+	 it will check what is the current size of filled elements and what is the maximum size of the array. 
+	 If size of filled elements is greater than maximum size of the array(or will be after adding current element) 
+	 then size of the array must be increased.
+	 So what happens internally is a new Array is created with size 1.5*currentSize and the data from old Array is copied into this new Array. 
+
+	public boolean add(E e) {
+    ensureCapacity(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+    }
+ 
+ 
+ 
+    public void ensureCapacity(int minCapacity) {
+    modCount++;
+    int oldCapacity = elementData.length;
+    if (minCapacity > oldCapacity) {
+        Object oldData[] = elementData;
+        int newCapacity = (oldCapacity * 3)/2 + 1;
+            if (newCapacity < minCapacity)
+        newCapacity = minCapacity;
+            // minCapacity is usually close to size, so this is a win:
+            elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+    }
+
+remove(int)
+
+This method removes a single element at given position. 
+After that all elements from the right are shifted to the left via System.arraycopy call, 
+that’s why this method has O(n) complexity. 
+
+contains(Object), indexOf(Object)
+
+First method checks is a given object is present in the list (and defined as indexOf(elem) >= 0). 
+Second method tries to find position of given element in the list (nulls are supported). Both methods have O(n) complexity,
+
+ 
